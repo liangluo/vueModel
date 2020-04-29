@@ -17,10 +17,11 @@ module.exports = {
       mediaQuery: false, // (Boolean) 许在媒体查询中转换`px.
     },
     'postcss-viewport-units': {},
-    cssnano: { // 主要用来压缩和清理CSS代码
-      preset: 'advanced',
-      autoprefixer: false,
-      'postcss-zindex': false,
-    },
+    "cssnano": {
+      "cssnano-preset-advanced": {
+        zindex: false,
+        autoprefixer: false
+      },
+    }
   },
 };

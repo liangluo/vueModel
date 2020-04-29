@@ -3,17 +3,19 @@ import axios from 'axios';
 // 判断当前环境
 // eslint-disable-next-line import/prefer-default-export
 export function getENV() {
-  // 1.测试环境  2本地 3线上
+  // 1.灰度  2本地 3线上
   const url = window.location.origin;
   // eslint-disable-next-line no-nested-ternary
-  return url.indexOf('34.128.16.6') > -1 ? 1 : url.indexOf('localhost') > -1 ? 2 : 3;
+  return url.indexOf('http://touch.iread.wo.com.cn') > -1 ? 1 : url.indexOf('localhost') > -1 ? 2 : 3;
 }
 
-const host = window.location.origin;
+//const host = window.location.origin+'/'; //打包的接口地址
+//const host = 'http://m.iread.wo.cn/'; //现网接口地址
+const host ='http://42.48.28.6:8083/'; //测试环境接口地址
 const http = {};
 
 const instance = axios.create({
-  baseURL: getENV() === 2 ? '/api' : `${host}/xkpJds/rest`,
+  baseURL:`${host}/`,
   timeout: 10000,
   headers: {
     'content-Type': 'application/json;charset=UTF-8',
@@ -27,7 +29,7 @@ instance.interceptors.request.use((config) => {
   // 添加公共的请求参数
   const params = {
     source: 9,
-    channelid: 22,
+    channelid: 18000000,
   };
   // eslint-disable-next-line no-param-reassign
   config.data = JSON.stringify(config.data);
@@ -92,7 +94,7 @@ instance.interceptors.response.use((response) => response, (err) => {
 // eslint-disable-next-line func-names
 http.get = function (url, params) {
   return new Promise((resolve, reject) => {
-    instance.get(url, { params }).then((response) => {
+    instance.get(url, params).then((response) => {
       resolve(response.data);
     })
       .catch((err) => {
