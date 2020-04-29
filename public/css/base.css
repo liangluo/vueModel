@@ -96,6 +96,7 @@ div{
 img {
     border: 0;
     display: block;
+    -webkit-touch-callout:default;
 }
 
 ul {
