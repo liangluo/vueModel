@@ -1,6 +1,10 @@
+const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
+
+// xxxx表示项目名称
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/', // 部署应用包时的基本URL
-  outputDir: 'vuemod', // build后文件目录
+  publicPath: process.env.NODE_ENV === 'production' ? '/xxxx' : '/', // 部署应用包时的基本URL
+  outputDir: 'xxxx', // build后文件目录
   assetsDir: './assets', // 静态资源打包地址
   indexPath: 'index.html', // index.html输入路径
   filenameHashing: true, // 静态资源带hash
@@ -14,7 +18,21 @@ module.exports = {
   chainWebpack: (config) => {
     config.module.rule('images').use('url-loader').loader('url-loader').tap((options) => Object.assign(options, { limit: 10240 })); // 修改图片转为base64的限制规则
   },
-  configureWebpack: () => {},
+  configureWebpack: (config) => {
+    if (process.env.NODE_ENV === 'production') {
+        return {
+            plugins: [
+                new CompressionPlugin({
+                    algorithm: 'gzip',
+                    test: /\.js$|\.html$|\.css$/,
+                    threshold: 1000,
+                    deleteOriginalAssets: false,
+                    minRatio: 0.8,
+                }),
+            ],
+        };
+    }
+  },
   // 跨域设置
   devServer: {
     open: true, // 自动打开浏览器配置
@@ -22,16 +40,22 @@ module.exports = {
     port: 8080, // 端口
     https: false,
     hotOnly: true, // 热更新
+    overlay: {
+      warnings: false, // 不显示警告
+      errors: false,
+    },
     // proxy: {
-    //     '/api': {
-    //         target: 'https://xxxxx/api/',//要代理的后台地址
-    //         ws: true,
-    //         changeOrigin: true,
-    //         pathRewrite: {
-    //         '^/api': ''  //通过pathRewrite重写地址，将前缀/api转为/
-    //         }
-    //     }
-    // }
+    //   '/api': {
+    //     //target: 'http://www.zxinhb.com', // 要代理的后台地址
+    //     target: 'http://116.162.55.189:81', // 要代理的后台地址
+    //     //target: 'http://wgwl.woread.com.cn', // 要代理的后台地址
+    //     ws: true,
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': '/', // 通过pathRewrite重写地址，将前缀/api转为/
+    //     },
+    //   },
+    // },
   },
 
   // css相关配置

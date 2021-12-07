@@ -224,35 +224,6 @@ img {
     -webkit-flex-wrap:wrap;
     flex-wrap:wrap;
 }
-.mod-mask{
-    width:100%;
-    height:100%;
-    background:rgba(0, 0, 0, .5);
-    position: fixed;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    display:none;
-    z-index: 999;
-}
-.mod-mask-content{
-    width:100%;
-    height: 100%;
-}
-.mod-toast{
-    position: fixed;
-    top:50%;
-    left:50%;
-    line-height: .4rem;
-    background:rgba(0, 0, 0, .7);
-    font-size: .24rem;
-    color:#fff;
-    padding:.2rem;
-    transform: translate3d(-50%,-50%,0);
-    -webkit-transform: translate3d(-50%,-50%,0);
-    display:none;
-}
 /* 边框 */
 .border-top::before{
     content: "";
@@ -309,4 +280,24 @@ img {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     background: #E5E5E5;
+}
+/* 占位图 */
+.mod-skeleton .mod-skeleton-item{
+    background-color:#eee;
+    border-radius: 4px;
+    width: 100%;
+}
+.animation-opacity{
+    animation: 1.5s opacitys infinite;
+}
+@keyframes opacitys{
+    0%{
+        opacity: 0.5;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.5;
+    }
 }

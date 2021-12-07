@@ -1,23 +1,26 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Demo from '../views/components.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Demo',
+    component: Demo,
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+    path: '/Home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue'),
   },
 ];
 
+// xxxx替换为项目名称
 const router = new VueRouter({
+  mode: 'history',
+  base: '/xxxx/',
   linkActiveClass: 'active',
   linkExactActiveClass: 'active',
   scrollBehavior(to, from, savedPosition) {

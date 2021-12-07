@@ -1,42 +1,36 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
-import portAPI from '@util/api';
+import portAPI from '@/util/api';
 
 export default {
   name: 'Home',
-  data(){
-    return{
+  data() {
+    return {
 
-    }
+    };
   },
-  components: {
-    HelloWorld,
-  },
-  created(){
+  created() {
 
   },
-  mounted(){
+  mounted() {
 
   },
-  methods:{
-    //请求接口
-    getAPI(){
-      let data ={
-        cataidx:'',
+  methods: {
+    // 请求接口
+    getAPI() {
+      const data = {
+        cataidx: '',
       };
-      portAPI.get_book_data(data).then(res=>{
+      portAPI.get_book_data(data).then((res) => {
             this.data = res.message;
-      })
+      });
     },
   },
-  
+
 };
 </script>

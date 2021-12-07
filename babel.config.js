@@ -2,10 +2,10 @@ module.exports = {
   presets: [
     '@vue/cli-plugin-babel/preset',
   ],
-  plugins: [['component',
-    {
-      libraryName: 'mint-ui',
+  plugins: [
+    ['import', {
+      libraryName: 'vant',
       style: true,
-    },
-  ]],
+    }, 'vant'],
+  ],
 };
